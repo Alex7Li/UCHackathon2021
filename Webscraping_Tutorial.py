@@ -1,17 +1,18 @@
-import requests
-from bs4 import BeautifulSoup
+import time
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import time
 from webdriver_manager.chrome import ChromeDriverManager
 
+# Driver creates some newlines which mess up the unittest.
+driver = webdriver.Chrome(ChromeDriverManager().install())
 
-def selenium():
-    """
 
-    :return:
+def selenium(driver):
     """
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    >>> selenium()
+    True
+    """
     url = 'https://campbells.com.au/convenience'
     username = '0032353419'
     password = 'Australia@1'
@@ -22,6 +23,7 @@ def selenium():
     driver.find_element_by_id("j_username").send_keys(username)
     driver.find_element_by_id("j_password").send_keys(password)
     driver.find_element_by_id("loginButton").click()
+    return True
 
 
 # An example of code that uses doctests to automatically test code.
@@ -71,4 +73,3 @@ if __name__ == "__main__":
     import doctest
 
     doctest.testmod()
-    selenium()
